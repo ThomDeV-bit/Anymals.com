@@ -7,25 +7,24 @@ const conecte = async () => {
    global.conetion = conex
    return conex
 }
-
 const showAnymal = async () => {
    const conex = await conecte()
-   const [coluna] = await conex.query('select * from user')
+   const [coluna] = await conex.query('select * from pets')
    return await coluna
 
 }
 
 const insertAnymal = async (client) => {
    conex = await conecte()
-   const sql = 'insert into user (onwer,mail,size,weight,sex,color,especie) values (?,?,?,?,?,?,?)'
-   const insertValues = [client.onwer, client.mail, client.size, client.weight, client.sex, client.color, client.especie]
+   const sql = 'insert into pets (name_pet,specie,size,weight,sex,color) values (?,?,?,?,?,?)'
+   const insertValues = [client.name_pet, client.specie, client.size, client.weight, client.sex, client.color]
    await conex.query(sql, insertValues)
    console.log(client.onwer + ' client successfully created')
 }
 
 const updateAnymal = async (id, cliente) => {
    const conex = await conecte()
-   const sql = 'UPDATE user SET onwer=?,mail=?,size=?,weight=?,sex=?,color=?,especie=? WHERE id=?'
+   const sql = 'UPDATE pets SET onwer=?,mail=?,size=?,weight=?,sex=?,color=?,especie=? WHERE id=?'
    const updateValues = [client.onwer, client.mail, client.size, client.weight, client.sex, client.color, client.especie, id]
    await conex.query(sql, updateValues)
    console.log(Client.onwer + ' client update successfully')
@@ -36,7 +35,7 @@ const deleteAnymal = async (id) => {
    const conex = await conecte()
 
    try {
-      const sql = 'delete from user where id=? '
+      const sql = 'delete from pet where id=? '
       const idAnymal = [id]
       console.log('User id ' + id + ' successfully deleted')
       await conex.query(sql, idAnymal)
